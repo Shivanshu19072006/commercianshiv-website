@@ -164,7 +164,7 @@ document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
 document.addEventListener('DOMContentLoaded', () => {
     const reviewForm = document.getElementById('review-form');
     const reviewGrid = document.getElementById('review-grid');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxtPDjGrRlicUX7uFCW2Gdgh8T4C3SL4DmAGVFBRN29cBPj5NSXEu09xkGBtOlOp2HS/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzj8BfGsRTDJ0Il7GgtpWLeJ5Eb40FBmwIDv8uvf7Ci9mcdhRl1Hew_e5bJknPDjIrLUA/exec';
 
     if (reviewGrid) { reviewGrid.innerHTML = '<p style="text-align:center; color:#666;">Loading authentic reviews...</p>'; }
 
