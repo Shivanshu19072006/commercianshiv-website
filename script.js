@@ -12,6 +12,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+// ==========================================
+// 1.5 MOBILE MENU TOGGLE LOGIC
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            // Menu ko open/close karo
+            navLinks.classList.toggle('active');
+            
+            // Icon ko change karo (Hamburger se Cross 'X' me)
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+
+        // Jab user kisi menu link par click kare, toh menu automatically band ho jaye
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    }
+});
+
 // ==========================================
 // 2. FILTER LOGIC
 // ==========================================
