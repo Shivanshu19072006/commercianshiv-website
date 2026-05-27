@@ -337,7 +337,12 @@ html, body {
 .info-card:hover .icon-circle { background: var(--primary-blue); }
 .info-card:hover .icon-circle i { color: white; }
 .info-card h4 { font-size: 16px; margin-bottom: 5px; font-weight: 700; color: #111;}
-.info-card p { font-size: 14.5px; color: #666; margin: 0; }
+.info-card p { 
+    font-size: 14.5px; 
+    color: #666; 
+    margin: 0; 
+    word-break: break-word; /* Bada email automatically next line me wrap ho jayega */
+}
 .contact-form-container { flex: 2; padding: 40px; background: #fff; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.03); width: 100%; }
 .contact-form-container h3 { font-size: 1.8rem; margin-bottom: 30px; font-weight: 800; color: #111;}
 .form-row { display: flex; gap: 20px; width: 100%; }
@@ -352,6 +357,20 @@ html, body {
 }
 @media (max-width: 576px) {
     .form-row { flex-direction: column; gap: 0; }
+    
+    /* Naya Code: Mobile me Contact Info Cards ko center aur stack karne ke liye */
+    .info-card { 
+        flex-direction: column; /* Icon upar, text neeche */
+        text-align: center; 
+        padding: 25px 15px; 
+    }
+    .info-card .icon-circle {
+        margin-bottom: 10px; /* Icon ke neeche space */
+    }
+    /* Mobile me hover effect ko thoda theek kiya taaki ajeeb na lage */
+    .info-card:hover { 
+        transform: translateY(-5px); 
+    }
 }
 
 /* --- PREMIUM FOOTER --- */
