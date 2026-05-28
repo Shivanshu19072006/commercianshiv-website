@@ -151,7 +151,7 @@ body {
 .hero-visual { flex: 1; position: relative; display: flex; justify-content: flex-end; opacity: 0; animation: fadeInRight 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards 0.4s; }
 .owner-image-wrapper { position: relative; z-index: 2; width: 100%; max-width: 440px; transition: var(--transition); }
 .owner-image-wrapper:hover { transform: scale(1.02) rotate(1deg); }
-.owner-img { width: 100%; height: auto; border-radius: 24px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
+.owner-img { width: 100%; height: auto; }
 
 .floating-ebook { position: absolute; bottom: -20px; left: -10px; width: 140px; height: 140px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255,255,255,0.5); z-index: 3; animation: floatBounce 4s ease-in-out infinite; }
 .floating-ebook img { width: 75px; border-radius: 6px; box-shadow: -5px 5px 15px rgba(0,0,0,0.15); transform: rotate(-8deg); transition: var(--transition); }
