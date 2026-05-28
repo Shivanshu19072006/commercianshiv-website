@@ -23,14 +23,14 @@
 /* 🚨 THE ULTIMATE FIX FOR MOBILE WIDTH 🚨 */
 html { 
     scroll-behavior: smooth; 
-    overflow-x: hidden; /* Ye horizontal scroll / right side gap ko rokega */
+    overflow-x: clip; /* Ye horizontal scroll / right side gap ko rokega */
     width: 100%; 
 }
 
 body {
     background-color: var(--bg-light); 
     color: var(--text-dark);
-    overflow-x: hidden; /* Exact bounds for mobile */
+    overflow-x: clip; /* Exact bounds for mobile */
     width: 100%; /* 100vw ki jagah 100% use karna zaroori hai */
     position: relative;
     background-image: 
