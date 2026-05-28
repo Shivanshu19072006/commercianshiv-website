@@ -14,6 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+// ==========================================
+// SCROLL REVEAL ANIMATIONS
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 // Section visibility percentage
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                // Optional: Stop observing once animated if you only want it to happen once
+                // observer.unobserve(entry.target); 
+            }
+        });
+    }, observerOptions);
+
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    revealElements.forEach((el) => observer.observe(el));
+});
+
+
 // ==========================================
 // 1.5 MOBILE MENU TOGGLE LOGIC
 // ==========================================
