@@ -512,3 +512,87 @@ document.addEventListener('DOMContentLoaded', () => {
     // Call function on page load
     fetchNotifications();
 });
+
+
+
+
+
+// ==========================================
+// FOMO COUNTDOWN TIMER
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minsEl = document.getElementById('minutes');
+    const secsEl = document.getElementById('seconds');
+
+    if(!daysEl) return; // Agar page par timer nahi hai toh JS error na de
+
+    // Set countdown for 48 hours from the first visit
+    let countDownDate = localStorage.getItem('comboOfferTimer');
+    
+    if (!countDownDate) {
+        // Agar pehli baar aaya hai, toh aaj se 2 din (48 hrs) ka time set karo
+        const date = new Date();
+        date.setDate(date.getDate() + 2);
+        countDownDate = date.getTime();
+        localStorage.setItem('comboOfferTimer', countDownDate);
+    }
+
+    const timerInterval = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+
+        // Agar time khatam ho jaye, toh timer restart kar do (Business tactic)
+        if (distance < 0) {
+            const date = new Date();
+            date.setDate(date.getDate() + 2);
+            localStorage.setItem('comboOfferTimer', date.getTime());
+            return;
+        }
+
+        // Time calculations
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Update DOM with leading zeros (e.g., 09 instead of 9)
+        daysEl.innerText = days < 10 ? "0" + days : days;
+        hoursEl.innerText = hours < 10 ? "0" + hours : hours;
+        minsEl.innerText = minutes < 10 ? "0" + minutes : minutes;
+        secsEl.innerText = seconds < 10 ? "0" + seconds : seconds;
+
+    }, 1000);
+});
+
+
+
+
+// ==========================================
+// INTERACTIVE FAQ ACCORDION
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+
+            // Close all other open FAQs
+            faqItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+                otherItem.querySelector('.faq-answer').style.maxHeight = null;
+            });
+
+            // If the clicked item wasn't active, open it
+            if (!isActive) {
+                item.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + "px"; // Dynamically get content height
+            }
+        });
+    });
+});
