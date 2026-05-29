@@ -38,8 +38,6 @@
 <body>
 
 
-
-
 <!-- ================================== PREMIUM COMMERCE PRELOADER ================================== -->
     <div id="premium-preloader">
         <!-- Commerce Background Floating Icons -->
@@ -63,9 +61,9 @@
             </div>
             
             <div class="brand-reveal">
-                Commercianshiv<span>.</span>
+                CommercianMentor<span>.</span>
             </div>
-            <p class="loader-subtitle">Loading Premium Resources...</p>
+            <p class="loader-subtitle">Loading Resources...</p>
         </div>
     </div>
     <!-- ============================================================================================== -->
@@ -90,10 +88,25 @@
             </nav>
 
             <div class="nav-actions">
-                <a href="#cart" class="cart-btn">
-                    <i class="fa-solid fa-bell"></i>
-                    <span class="cart-count">0</span>
-                </a>
+                <div class="notification-wrapper">
+                    <a href="#" class="notification-btn" id="notificationBtn">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notification-count" id="notifCount">0</span>
+                    </a>
+                    
+                    <div class="notification-dropdown" id="notifDropdown">
+                        <div class="notif-header">
+                            <h3><i class="fa-solid fa-bolt" style="color:#f39c12; margin-right:5px;"></i> Latest Updates</h3>
+                            <span class="mark-read" id="markReadBtn">Mark as read</span>
+                        </div>
+                        <div class="notif-body" id="notifBody">
+                            <div class="notif-loading">
+                                <i class="fas fa-spinner fa-spin"></i> Fetching updates...
+                            </div>
+                            </div>
+                    </div>
+                </div>
+
                 <a href="#products" class="cta-btn">Shop Now</a>
                 
                 <div class="menu-toggle" id="mobile-menu">
