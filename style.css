@@ -828,8 +828,6 @@ body {
 }
 
 
-
-
 /* --- MOBILE HEADER MENU FIX --- */
 @media (max-width: 768px) {
     /* Container ki padding adjust ki taaki edges par space mile */
@@ -858,5 +856,489 @@ body {
     .menu-toggle { 
         font-size: 1.5rem !important; 
         margin-right: 2px;
+    }
+}
+
+
+
+
+
+/* ========================combo-secton========================= */
+
+
+
+/* =========================================
+   PREMIUM COMBO DEALS SECTION
+========================================= */
+.combo-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #fdfdfd 0%, #f4f7fb 100%);
+    width: 100%;
+}
+
+/* Header & Timer Layout */
+.combo-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 50px;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0, 86, 210, 0.05);
+    border: 1px solid rgba(0, 86, 210, 0.08);
+}
+.combo-title-area { flex: 1; }
+.bg-red-pulse { 
+    background: #ff4757; 
+    color: white; 
+    border: none;
+    animation: pulseRed 2s infinite;
+}
+
+/* Premium FOMO Timer */
+.fomo-timer-box {
+    background: #111;
+    padding: 15px 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: center;
+}
+.timer-label {
+    color: #ff4757;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+.countdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+.time-block { display: flex; flex-direction: column; align-items: center; }
+.time-block span { font-size: 24px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums;}
+.time-block small { font-size: 10px; color: #888; text-transform: uppercase; margin-top: 2px;}
+.colon { font-size: 20px; font-weight: 700; color: #555; margin-top: -12px;}
+
+@keyframes pulseRed {
+    0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
+}
+
+/* Combo Grid (2 Columns) */
+.combo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+/* Combo Card Design */
+.combo-card {
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0, 86, 210, 0.05);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+.combo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 86, 210, 0.12);
+    border-color: rgba(0, 86, 210, 0.2);
+}
+
+/* Overlapping Books Visual */
+.combo-visual {
+    height: 300px;
+    background: linear-gradient(135deg, #e6f0ff 0%, #cce0ff 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.combo-visual.variant-bg { background: linear-gradient(135deg, #f0e6ff 0%, #e0ccff 100%); }
+
+.discount-ribbon {
+    position: absolute;
+    top: 20px;
+    left: -35px;
+    background: #ff4757;
+    color: white;
+    padding: 8px 40px;
+    font-weight: 800;
+    font-size: 13px;
+    transform: rotate(-45deg);
+    box-shadow: 0 5px 15px rgba(255,71,87,0.3);
+    z-index: 10;
+    letter-spacing: 1px;
+}
+.discount-ribbon.bg-blue { background: var(--primary-blue); box-shadow: 0 5px 15px rgba(0,86,210,0.3); }
+
+/* Books CSS Magic */
+.books-overlap-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.combo-book {
+    position: absolute;
+    width: 130px; /* Book cover size */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: -10px 15px 25px rgba(0,0,0,0.15);
+    transition: var(--transition);
+}
+
+/* 3 Books Layout */
+.b-left { transform: translateX(-60px) rotate(-12deg) scale(0.85); z-index: 1; filter: brightness(0.9); }
+.b-right { transform: translateX(60px) rotate(12deg) scale(0.85); z-index: 2; filter: brightness(0.9); }
+.b-center { transform: translateY(-10px); z-index: 3; width: 140px; box-shadow: 0 25px 40px rgba(0,0,0,0.25); border: 2px solid #fff; }
+
+/* 2 Books Layout */
+.duo-books .b-left-duo { transform: translateX(-40px) rotate(-8deg); z-index: 1; }
+.duo-books .b-right-duo { transform: translateX(40px) rotate(8deg); z-index: 2; box-shadow: 0 20px 35px rgba(0,0,0,0.2); }
+
+/* Hover Animations for Books */
+.combo-card:hover .b-left { transform: translateX(-80px) rotate(-18deg) scale(0.9); }
+.combo-card:hover .b-right { transform: translateX(80px) rotate(18deg) scale(0.9); }
+.combo-card:hover .b-center { transform: translateY(-20px) scale(1.05); }
+.combo-card:hover .b-left-duo { transform: translateX(-60px) rotate(-15deg); }
+.combo-card:hover .b-right-duo { transform: translateX(60px) rotate(15deg) translateY(-10px); }
+
+/* Combo Details */
+.combo-details { padding: 30px; display: flex; flex-direction: column; flex: 1;}
+.combo-details h3 { font-size: 22px; font-weight: 800; color: #111; margin-bottom: 10px; line-height: 1.3;}
+.combo-desc { font-size: 14px; color: #666; margin-bottom: 20px;}
+.combo-includes { list-style: none; margin-bottom: 30px; flex: 1;}
+.combo-includes li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: #444; margin-bottom: 12px; font-weight: 500;}
+.combo-includes i { color: #27ae60; font-size: 16px; }
+
+.combo-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    padding-top: 20px;
+}
+.price-stack { display: flex; flex-direction: column; }
+.price-stack .old-price { font-size: 14px; color: #999; text-decoration: line-through; font-weight: 600; margin-bottom: -2px;}
+.price-stack .new-price { font-size: 28px; font-weight: 800; color: #111; line-height: 1;}
+.combo-btn { padding: 14px 28px; border-radius: 12px; font-size: 15px;}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+    .combo-header-wrapper { flex-direction: column; text-align: center; gap: 25px; align-items: center; padding: 30px 20px;}
+}
+@media (max-width: 768px) {
+    .combo-grid { grid-template-columns: 1fr; } /* Mobile me 1 column */
+    .combo-visual { height: 260px; }
+    .combo-details h3 { font-size: 20px; }
+}
+
+/* Combo Section Title Left Alignment Fix */
+.combo-title-area { text-align: left; }
+.combo-title-area .premium-title { justify-content: flex-start; }
+
+
+/* --- MOBILE FIX FOR COMBO PRICE & BUTTON --- */
+@media (max-width: 576px) {
+    .combo-price-row {
+        flex-direction: column; /* Row se Column me badal dega */
+        align-items: flex-start; /* Left align karega */
+        gap: 15px; /* Price aur button ke beech space */
+    }
+    
+    .price-stack {
+        flex-direction: row; /* Old aur New price ko ek line me layega */
+        align-items: baseline;
+        gap: 10px;
+    }
+    
+    .price-stack .old-price {
+        margin-bottom: 0;
+        font-size: 15px;
+    }
+    
+    .combo-btn {
+        width: 100%; /* Button ko screen jitna lamba kar dega */
+        justify-content: center; /* Button ke text ko center karega */
+        padding: 15px 0;
+    }
+}
+
+
+
+/* =========================================
+   PREMIUM WHATSAPP FLOATING WIDGET
+========================================= */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00ca11 0%, #3eff25 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+    z-index: 9999;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    animation: pulse-wa 2s infinite;
+}
+
+.whatsapp-float i {
+    margin-top: -1px; /* Center alignment fix for icon */
+    margin-left: 1px;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6);
+    animation: none; /* Hover karne par dhadakna band ho jayega */
+}
+
+/* Pulse Animation */
+@keyframes pulse-wa {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Mobile Responsive Adjustment */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+    }
+}
+
+
+
+
+
+/* =========================================
+   PREMIUM FAQ SECTION
+========================================= */
+.faq-container-main {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-item {
+    background: #fdfdfd;
+    border: 1px solid rgba(0, 86, 210, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.faq-item:hover {
+    border-color: rgba(0, 86, 210, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 86, 210, 0.05);
+}
+
+.faq-question {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: transparent;
+    transition: var(--transition);
+}
+
+.faq-question h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+.faq-question i {
+    color: var(--primary-blue);
+    transition: transform 0.4s ease;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), padding 0.4s ease;
+    background: #f8fafc;
+}
+
+.faq-answer p {
+    margin: 0;
+    color: #555;
+    font-size: 14.5px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* Active State Styles */
+.faq-item.active {
+    border-color: var(--primary-blue);
+    box-shadow: 0 15px 30px rgba(0, 86, 210, 0.08);
+}
+
+.faq-item.active .faq-question {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-answer {
+    padding: 20px 25px;
+    /* max-height is set dynamically via JS */
+}
+
+
+
+
+/* =========================================
+   UPDATED TOP ANNOUNCEMENT BAR (FIXED)
+========================================= */
+.top-bar {
+    background: #0f172a; 
+    color: #f8fafc;
+    font-size: 13px;
+    padding: 10px 0;
+    position: relative; /* Fixed hata kar relative kar diya */
+    width: 100%;
+    z-index: 9999;      
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Main White Header ko Top Bar ke neeche khiskane ke liye */
+header, nav {
+    position: sticky !important; /* Sticky behavior add kiya */
+    top: 0 !important;           /* Upar se 0 gap */
+    z-index: 9990;               /* Top bar ke theek neeche ki layer */
+}
+
+.top-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contact Info Styling */
+.top-contact {
+    display: flex;
+    gap: 25px;
+}
+
+.top-contact a {
+    color: #cbd5e1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.top-contact a:hover {
+    color: #3b82f6; 
+}
+
+.top-contact i {
+    color: #3b82f6;
+    font-size: 14px;
+}
+.top-announcement {
+    flex: 1;
+    max-width: 55%; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.05); 
+    padding: 4px 15px;
+    border-radius: 50px;
+}
+
+.sliding-text-wrapper {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.sliding-text {
+    display: inline-block;
+    animation: slideLeft 25s linear infinite; 
+}
+
+.sliding-text span {
+    padding-right: 80px; 
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.sliding-text span strong {
+    color: #ff4757; 
+    font-weight: 800;
+}
+
+@keyframes slideLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+
+/* --- MOBILE RESPONSIVE FIX --- */
+@media (max-width: 992px) {
+    .top-announcement { max-width: 100%; background: transparent; padding: 0;}
+    .top-contact { display: none; } 
+    .top-bar { padding: 8px 0; }
+    .sliding-text { animation: slideLeft 15s linear infinite; }
+}
+
+
+
+
+
+
+/* =========================================
+   HERO SECTION SPACING FIX
+========================================= */
+.hero, 
+.hero-section, 
+#home {
+    padding-top: 60px !important; /* Upar ka extra gap kam karne ke liye */
+    margin-top: 0 !important;
+}
+
+/* Mobile ke liye thoda aur kam gap taaki image pehle dikhe */
+@media (max-width: 768px) {
+    .hero, 
+    .hero-section, 
+    #home {
+        padding-top: 25px !important; 
     }
 }
