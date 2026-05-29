@@ -1,3 +1,28 @@
+
+// ==========================================
+// PREMIUM PRELOADER LOGIC
+// ==========================================
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('premium-preloader');
+    
+    // Website bohot fast hai, isiliye 1.8 seconds ka delay diya hai taaki 
+    // user ko tumhara premium loading animation dikhne ka time mile.
+    setTimeout(() => {
+        if(preloader) {
+            // Smooth fade out class add karo
+            preloader.classList.add('preloader-hidden');
+            
+            // Background se element ko puri tarah hata do
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 800);
+        }
+    }, 1800); // 1.8 seconds (Tum isko kam ya zyada kar sakte ho)
+});
+
+
+
+
 // ==========================================
 // 1. HEADER LOGIC
 // ==========================================
