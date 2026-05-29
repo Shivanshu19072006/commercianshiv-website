@@ -1,4 +1,3 @@
-
 // ==========================================
 // PREMIUM PRELOADER LOGIC
 // ==========================================
@@ -22,7 +21,6 @@ window.addEventListener('load', () => {
 
 
 
-
 // ==========================================
 // 1. HEADER LOGIC
 // ==========================================
@@ -36,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 
@@ -63,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealElements = document.querySelectorAll('.scroll-reveal');
     revealElements.forEach((el) => observer.observe(el));
 });
+
 
 
 // ==========================================
@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
 // ==========================================
 // 2. FILTER LOGIC
 // ==========================================
@@ -257,7 +256,7 @@ document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
 document.addEventListener('DOMContentLoaded', () => {
     const reviewForm = document.getElementById('review-form');
     const reviewGrid = document.getElementById('review-grid');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzj8BfGsRTDJ0Il7GgtpWLeJ5Eb40FBmwIDv8uvf7Ci9mcdhRl1Hew_e5bJknPDjIrLUA/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxtPDjGrRlicUX7uFCW2Gdgh8T4C3SL4DmAGVFBRN29cBPj5NSXEu09xkGBtOlOp2HS/exec';
 
     if (reviewGrid) { reviewGrid.innerHTML = '<p style="text-align:center; color:#666;">Loading authentic reviews...</p>'; }
 
@@ -401,4 +400,115 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+});
+
+
+
+
+
+
+
+
+// ==========================================
+// NOTIFICATION SYSTEM (Google Sheets Connected)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const notifBtn = document.getElementById('notificationBtn');
+    const notifDropdown = document.getElementById('notifDropdown');
+    const markReadBtn = document.getElementById('markReadBtn');
+    const notifCount = document.getElementById('notifCount');
+    
+    // 1. Toggle Dropdown Menu
+    if(notifBtn && notifDropdown) {
+        notifBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            notifDropdown.classList.toggle('active');
+        });
+
+        // 2. Click outside to close
+        document.addEventListener('click', (e) => {
+            if(!notifBtn.contains(e.target) && !notifDropdown.contains(e.target)) {
+                notifDropdown.classList.remove('active');
+            }
+        });
+    }
+
+    // 3. Mark as Read Functionality
+    if(markReadBtn) {
+        markReadBtn.addEventListener('click', () => {
+            if(notifCount) {
+                notifCount.style.display = 'none'; // Hide the red badge
+                notifCount.innerText = '0';
+            }
+            // Remove red dots from all premium items
+            document.querySelectorAll('.unread-indicator').forEach(dot => {
+                dot.style.display = 'none';
+            });
+        });
+    }
+
+    // 4. Fetch Data from Google Sheets (Tumhara Working URL)
+    const NOTIF_SHEET_URL = 'https://script.google.com/macros/s/AKfycbx0DEayNlQk8Y_EeQAh4vK5nL80odJEueNDKRDaNugtjiTN-dO90gH1Ko0MZFesl8rhtA/exec'; 
+    
+    async function fetchNotifications() {
+        try {
+            const response = await fetch(NOTIF_SHEET_URL);
+            const data = await response.json();
+            const notifBody = document.getElementById('notifBody');
+            
+            if(!notifBody) return;
+            
+            notifBody.innerHTML = ''; // Clear loading text
+            
+            if(data.length === 0) {
+                notifBody.innerHTML = '<div class="notif-loading">No new updates right now.</div>';
+                if(notifCount) notifCount.style.display = 'none';
+                return;
+            }
+
+            // Update badge count
+            if(notifCount) {
+                notifCount.innerText = data.length;
+                notifCount.style.display = 'flex';
+            }
+
+            // Sabse naye messages upar dikhane ke liye reverse kiya
+            const latestData = data.reverse();
+
+            latestData.forEach(item => {
+                // BUG FIX: Agar Google Sheet "1899" wala weird code bheje, toh usko clean kar do
+                let rawDate = String(item.date);
+                let rawTime = String(item.time);
+                
+                let cleanDate = rawDate.includes('1899') ? 'Recent' : rawDate;
+                let cleanTime = rawTime.includes('1899') ? 'Update' : rawTime;
+
+                // Naya Premium HTML Structure
+                const notifHTML = `
+                    <div class="premium-notif-item">
+                        <div class="notif-icon-circle">
+                            <i class="fa-solid fa-bell-concierge"></i>
+                        </div>
+                        <div class="notif-content-box">
+                            <div class="notif-top-row">
+                                <span class="notif-timestamp">${cleanDate} • ${cleanTime}</span>
+                                <div class="unread-indicator"></div>
+                            </div>
+                            <p class="notif-message-text">${item.message}</p>
+                        </div>
+                    </div>
+                `;
+                notifBody.innerHTML += notifHTML;
+            });
+        } catch(error) {
+            console.log("Error loading notifications: ", error);
+            const notifBody = document.getElementById('notifBody');
+            if(notifBody) {
+                notifBody.innerHTML = '<div class="notif-loading">Unable to load updates. Check connection.</div>';
+            }
+        }
+    }
+
+    // Call function on page load
+    fetchNotifications();
 });
