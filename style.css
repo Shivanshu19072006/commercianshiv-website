@@ -241,11 +241,25 @@ body {
 .custom-checkbox input:checked ~ .checkmark:after { display: block; }
 .custom-checkbox .checkmark:after { left: 6px; top: 2px; width: 5px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
 
+/* Mobile Sticky Filter Fix - REMOVED STICKY */
 @media (max-width: 900px) {
     .shop-layout { flex-direction: column; width: 100%; }
-    .sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); padding: 15px 20px; position: sticky; top: 60px; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 10px; }
+    .sidebar { 
+        width: 100%; 
+        border-right: none; 
+        border-bottom: 1px solid rgba(0,0,0,0.1); 
+        padding: 15px 20px; 
+        position: static; /* 🚨 Yahan sticky hata ke static kar diya 🚨 */
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        display: flex; flex-direction: column; gap: 10px;
+    }
     .filter-header { width: 100%; margin-bottom: 5px; }
     .filter-group { margin-bottom: 0; display: flex; flex-wrap: wrap; gap: 15px; align-items: center;}
+    .filter-group h4 { margin-bottom: 0; margin-right: 10px; }
+    .custom-checkbox { margin-bottom: 0; }
 }
 @media (max-width: 576px) { .product-grid { grid-template-columns: 1fr; width: 100%; } }
 
@@ -329,9 +343,17 @@ body {
 .avatar { width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary-blue), #00a8ff); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 5px 15px rgba(0, 86, 210, 0.3); transition: var(--transition);}
 .user-review-card:hover .avatar { transform: rotate(360deg); }
 .reviewer-name { font-weight: 800; font-size: 17px; color: #111;}
+/* Mobile Sticky Form Fix - REMOVED STICKY */
 @media (max-width: 900px) {
     .reviews-layout { flex-direction: column; width: 100%; }
-    .review-form-card { width: 100%; position: sticky; top: 60px; margin-bottom: 20px; z-index: 100; padding: 20px; }
+    .review-form-card { 
+        width: 100%; 
+        position: static; /* 🚨 Yahan sticky hata ke static kar diya 🚨 */
+        margin-bottom: 20px; 
+        padding: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .review-display-area { width: 100%; }
 }
 
 /* --- CONTACT SECTION --- */
