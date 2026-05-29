@@ -826,3 +826,37 @@ body {
     .social-grid { grid-template-columns: 1fr; }
     .social-card { padding: 30px 20px; }
 }
+
+
+
+
+/* --- MOBILE HEADER MENU FIX --- */
+@media (max-width: 768px) {
+    /* Container ki padding adjust ki taaki edges par space mile */
+    .nav-container { 
+        padding: 12px 15px !important; 
+    }
+    
+    /* Logo thoda chota kiya taaki text screen se bahar na jaye */
+    .logo { 
+        font-size: 1.25rem !important; 
+    }
+    
+    /* Bell aur Menu icon ke beech ka gap set kiya */
+    .nav-actions { 
+        gap: 12px !important; 
+    }
+    
+    /* Bell icon ka size mobile ke hisaab se optimize kiya */
+    .notification-btn { 
+        width: 38px !important; 
+        height: 38px !important; 
+        font-size: 1.1rem !important; 
+    }
+    
+    /* Menu icon ka size set kiya */
+    .menu-toggle { 
+        font-size: 1.5rem !important; 
+        margin-right: 2px;
+    }
+}
