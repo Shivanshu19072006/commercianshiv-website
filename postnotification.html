@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Post Notification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { 
+            background: linear-gradient(135deg, #f4f6f8 0%, #eef5ff 100%); 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 86, 210, 0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.05);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            transition: all 0.4s ease;
+        }
+
+        h2 { color: #111; font-weight: 800; margin-bottom: 25px; text-align: center; font-size: 1.8rem; }
+        h2 span { color: #0056d2; }
+        
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px; }
+        
+        input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #eaeaea;
+            border-radius: 12px;
+            font-size: 14.5px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #fdfdfd;
+        }
+        input:focus, textarea:focus {
+            border-color: #0056d2;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0, 86, 210, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #0056d2, #00a8ff);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(0, 86, 210, 0.2);
+        }
+        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0, 86, 210, 0.3); }
+        .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+        #adminPanel { display: none; }
+        .error-msg { color: #ff4757; font-size: 13px; font-weight: 600; text-align: center; margin-top: 10px; display: none;}
+        .auto-info { font-size: 12px; color: #27ae60; text-align: center; margin-bottom: 15px; font-weight: 500;}
+    </style>
+</head>
+<body>
+
+    <div class="glass-card" id="loginContainer">
+        <h2>Admin <span>Login</span></h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Admin ID</label>
+                <input type="text" id="adminId" placeholder="Enter ID" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="adminPass" placeholder="Enter Password" required>
+            </div>
+            <button type="submit" class="btn-submit">Unlock Portal</button>
+            <p class="error-msg" id="loginError">Incorrect ID or Password!</p>
+        </form>
+    </div>
+
+    <div class="glass-card" id="adminPanel">
+        <h2>Post <span>Update</span></h2>
+        
+        <p class="auto-info"><i class="fas fa-clock"></i> Date & Time will be auto-generated</p>
+
+        <form id="postForm">
+            <div class="input-group">
+                <label>Notification Message</label>
+                <textarea id="notifMsg" rows="5" placeholder="Write your new update here..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn-submit" id="postBtn">Push to Website</button>
+        </form>
+    </div>
+
+    <script>
+        // ==========================================
+        // SETTINGS: APNI DETAILS YAHAN DAALO
+        // ==========================================
+        const CORRECT_ID = "shivanshu.admin";           
+        const CORRECT_PASS = "CM@1907";      
+        const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0DEayNlQk8Y_EeQAh4vK5nL80odJEueNDKRDaNugtjiTN-dO90gH1Ko0MZFesl8rhtA/exec"; // 🚨 Apna Naya POST wala URL daalo 🚨
+
+        // DOM Elements
+        const loginContainer = document.getElementById('loginContainer');
+        const adminPanel = document.getElementById('adminPanel');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const postForm = document.getElementById('postForm');
+        const postBtn = document.getElementById('postBtn');
+
+        // Login Logic
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('adminId').value;
+            const pass = document.getElementById('adminPass').value;
+
+            if (id === CORRECT_ID && pass === CORRECT_PASS) {
+                loginContainer.style.display = 'none';
+                adminPanel.style.display = 'block';
+            } else {
+                loginError.style.display = 'block';
+            }
+        });
+
+        // Function to generate premium Date & Time format
+        function getAutoDateTime() {
+            const now = new Date();
+            
+            // Format Date: "29 May 26"
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const d = now.getDate();
+            const m = months[now.getMonth()];
+            const y = String(now.getFullYear()).slice(-2); // gets "26" from 2026
+            const customDate = `${d} ${m} ${y}`;
+
+            // Format Time: "10:00 AM"
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // 0 baje ko 12 banayega
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            const customTime = `${hours}:${minutes} ${ampm}`;
+
+            return { customDate, customTime };
+        }
+
+        // Post Notification Logic
+        postForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            postBtn.innerText = "Pushing Update...";
+            postBtn.disabled = true;
+
+            // Auto-generate time jab submit button dabega
+            const { customDate, customTime } = getAutoDateTime();
+
+            const payload = {
+                date: customDate,     // Jaise: 29 May 26
+                time: customTime,     // Jaise: 10:30 AM
+                message: document.getElementById('notifMsg').value
+            };
+
+            try {
+                await fetch(APP_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Import for google sheets
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                alert("🔥 Notification Successfully Pushed to Website!");
+                postForm.reset();
+
+            } catch (error) {
+                alert("Error! Check internet connection or URL.");
+                console.error(error);
+            } finally {
+                postBtn.innerText = "Push to Website";
+                postBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
