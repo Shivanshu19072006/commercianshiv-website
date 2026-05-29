@@ -1342,3 +1342,80 @@ header, nav {
         padding-top: 25px !important; 
     }
 }
+
+
+
+
+/* =========================================
+   MASTER MOBILE HEADER & MENU FIX
+========================================= */
+@media (max-width: 768px) {
+    
+    /* 1. Header ki strict height aur padding lock ki */
+    header, nav {
+        height: 70px !important; 
+        min-height: 70px !important;
+        max-height: 70px !important;
+        padding: 0 !important; 
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        background: #fff !important; 
+    }
+
+    .nav-container {
+        height: 100% !important;
+        width: 100% !important;
+        padding: 0 15px !important; /* Left-Right space */
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    /* 2. Menu Links (Dropdown) ko full width aur perfect position par set kiya */
+    /* Note: Agar tumhari ul class ka naam '.nav-list' ya kuch aur hai, toh wo use karna */
+    /* 2. Menu Links (Dropdown) Background Fix */
+    .nav-links, .nav-menu { 
+        position: absolute !important;
+        top: 70px !important; 
+        left: 0 !important;
+        width: 100% !important; 
+        
+        /* 🚨 YAHAN FIX HAI: Box ki height ko links ke hisaab se lamba karega */
+        height: auto !important; 
+        max-height: none !important; 
+        
+        /* 🚨 Solid White Background taaki pichla text na dikhe */
+        background-color: #ffffff !important; 
+        
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important; /* Premium shadow */
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 20px 0 30px 0 !important; /* Niche 30px ka extra gap jisse clean lage */
+        border-top: 1px solid #f0f0f0 !important;
+        z-index: 9999 !important; /* Hero section ke text ko pakka peeche dhakel dega */
+        border-radius: 0 0 20px 20px !important; 
+    }
+
+    /* 3. Menu ke andar ke Links ke beech ka gap aur design */
+    .nav-links li, .nav-menu li {
+        width: 100% !important;
+        text-align: center !important;
+        margin: 5px 0 !important;
+    }
+
+    .nav-links a, .nav-menu a {
+        display: block !important;
+        padding: 12px !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #333 !important;
+    }
+
+    /* 4. Action Icons ko proper align kiya */
+    .nav-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+}
